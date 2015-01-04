@@ -1,0 +1,116 @@
+package project3;
+
+public class TemperatureDemo {
+
+	private static int sum; // Store sums
+	private static float[] weekAvg = new float[4]; // Store weekly avg temp
+	private static double[] dayAvg = new double[7];// Store average of temp on
+													// day 1-7
+
+	private static int max; // Store max temp values
+	private static int min; // Store min temp values
+
+	public static void main(String[] args) {
+
+		// Initialize the Array of Temperatures based on assignment
+		int[][] temperatures = new int[][] { { 73, 71, 68, 69, 75, 77, 78 },
+				{ 76, 73, 72, 72, 75, 79, 76 }, { 79, 82, 84, 84, 81, 78, 78 },
+				{ 75, 72, 68, 69, 65, 63, 65 } };
+
+		// Calculate weekly average temperature and stores it in array
+		// weekAvg(0-3)
+		// Sum gathers the total value and is divided by the number of days in a
+		// week(7)
+		// before it is stored in its appropriate array.
+		for (int y = 0; y < 4; y++) {
+			sum = 0;
+			for (int x = 0; x < 7; x++) {
+				sum += temperatures[y][x];
+			}
+			weekAvg[y] = ((float) sum / 7);
+		}
+
+		// Print out the weekly average temperature. We have x+1 to account for
+		// numbering purposes.
+		for (int x = 0; x < 4; x++) {
+			System.out.println("The average for week " + (x + 1) + " is "
+					+ weekAvg[x] + "\n");
+		}
+
+		System.out.println("\n");
+
+		// Calculate the average temperature for a given day (1-7) and store it
+		// in array
+		// dayAvg(0-6). Sum gathers the total of each day and is divided by the
+		// number of
+		// rows(4).
+		for (int y = 0; y < 7; y++) {
+			sum = 0;
+			for (int x = 0; x < 4; x++) {
+				sum += temperatures[x][y];
+			}
+			dayAvg[y] = (double) sum / 4;
+		}
+
+		// Print out the average temp for each day (1-7) Add 1 to x to account
+		// for days.
+		for (int x = 0; x < 7; x++) {
+			System.out.println("The average for day " + (x + 1) + " is "
+					+ dayAvg[x] + "\n");
+		}
+
+		System.out.println("\n");
+
+		// Determine the Max and Min temp for each day (1-7) and prints it out.
+		for (int y = 0; y < 7; y++) {
+			max = 0; // Resets the value of max to 0 for each day
+			min = temperatures[0][y]; // Resets the value of min to the first
+										// week's day value
+			for (int x = 0; x < 4; x++) {
+				if (max < temperatures[x][y]) // Replace max if current temp is
+												// higher
+				{
+					max = temperatures[x][y];
+				}
+
+				if (min > temperatures[x][y]) // Replace min if current temp is
+												// lower
+				{
+					min = temperatures[x][y];
+				}
+			}
+			System.out.println("The highest temperature for day " + (y + 1)
+					+ " is " + max + "\n");
+			System.out.println("The lowest temperature for day " + (y + 1)
+					+ " is " + min + "\n\n");
+		}
+
+		System.out.println("\n\n");
+
+		sum = 0; // Reset the value of sum to 0
+
+		// Determine the overall average temperature.
+		for (int x = 0; x < 4; x++) {
+			for (int y = 0; y < 7; y++) {
+				sum += temperatures[x][y];
+			}
+		}
+
+		double totalSum = (double) sum / 28; // Divide sum by the total input #
+												// (28)
+
+		System.out.println("The average of all is " + totalSum + "\n");
+
+		// Print out a table of the results
+		for (int z = 0; z < 4; z++) {
+			System.out.print("Week " + (z + 1) + ": ");
+			for (int x = 0; x < 7; x++) {
+				System.out.print(temperatures[z][x] + " ");
+			}
+
+			System.out.println();
+		}
+
+	}
+
+}
